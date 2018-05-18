@@ -2,17 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-    <img src="Govno.png">
-    <p>Welcome to govno chat app</p>
-    <ol id="messages"></ol>
+<body class="chat">
 
-    <form id="message-form">
-        <input name="message" type="text" placeholder="Сообщение" />
-        <button>Послать</button>
-    </form>
-    <button id="send-location">Вычислить по IP</button>
+    <div class="chat__sidebar">
+        <h3>Люди</h3>
+        <div id="user"></div>
+    </div>
+
+    <div class="chat__main">
+        <img src="Govno.png">
+
+        <ol id="messages" class="chat__messages"></ol>
+        <div class="chat__footer">
+            <form id="message-form">
+                <input name="message" type="text" placeholder="Сообщение" autofocus autocomplete="off"/>
+                <button>Послать</button>
+            </form>
+            <button id="send-location">Вычислить по IP</button>
+        </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/jquery-3.3.1.min.js"></script>

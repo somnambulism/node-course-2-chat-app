@@ -19,11 +19,13 @@ socket.on('newMessage', function (message) {
 jQuery('#message-form').on('submit', function (e) {
     e.preventDefault();
 
+    var messageTextbox = jQuery('[name=message]');
+
     socket.emit('createMessage', {
         from: 'User',
-        text: jQuery('[name=message]').val()
+        text: messageTextbox.val()
     }, function () {
-
+        messageTextbox.val('');
     });
 });
 
@@ -32,12 +34,16 @@ locationButton.on('click', function () {
     if (!navigator.geolocation) {
         return alert('Вычисление по IP не поддерживается Вашим браузером.');
     }
+
+    locationButton.attr('disabled', 'disabled').text('Вычисление по IP...');
     navigator.geolocation.getCurrentPosition(function (position) {
+        locationButton.removeAttr('disabled').text('Вычслить по IP');
         socket.emit('createLocationMessage', {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         });
     }, function () {
+        locationButton.removeAttr('disabled').text('Вычслить по IP');
         alert('Не удаётся вычислить по IP.');
     });
 });
